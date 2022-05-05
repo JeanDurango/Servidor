@@ -1,12 +1,16 @@
 //IMPORTO EL FRAMEWORD EXPRESS
 //const express = require('express')// VERSION VIEJA
-
 import express from 'express'
+
+// importos las rutas de la API 
+import{rutas} from '../routes/rutas.js'
+
 export class Servidor
 {
     constructor()
     {
         this.app = express() // atributo app guarda a exprees
+        this.llamarAuxiliare()//activo midlewareso ayudas
         this.atenderPeticiones()
     }
     despertarServidor()
@@ -18,31 +22,13 @@ export class Servidor
     }
     atenderPeticiones()
     {
-        //SERVICIOS DE MI API
-        this.app.get('/api/version1/sabado', function (req, res) 
-        {
-         res.send('Hello Jean Durango')
-        })
-
-        this.app.get('/api/version1/sabado/:id', function (req, res) 
-        {
-         res.send('Hello Jean Durango')
-        })
-
-        this.app.post('/api/version1/sabado', function (req, res) 
-        {
-         res.send('Hello Goez')
-        })
-
-        this.app.put('/api/version1/sabado', function (req, res) 
-        {
-         res.send('Hello Carlos')
-        })
-
-        this.app.delete('/api/version1/sabado', function (req, res) 
-        {
-         res.send('Hello Jhan carlos durango goez')
-        })
+       //llamando al archivo de rutas
+       this.app.use('/',rutas)
           
     }
+    llamarAuxiliare()
+    {
+        this.app.use(express.json())//es el ayudante para recibir dato por el dato por el body de la peticion 
+    }
+
 }
