@@ -5,11 +5,15 @@ import express from 'express'
 // importos las rutas de la API 
 import{rutas} from '../routes/rutas.js'
 
+// importo la conexion a bd 
+import{conectarConBD} from '../database/conexion.js'
+
 export class Servidor
 {
     constructor()
     {
         this.app = express() // atributo app guarda a exprees
+        this.conectarBD()
         this.llamarAuxiliare()//activo midlewareso ayudas
         this.atenderPeticiones()
     }
@@ -29,6 +33,10 @@ export class Servidor
     llamarAuxiliare()
     {
         this.app.use(express.json())//es el ayudante para recibir dato por el dato por el body de la peticion 
+    }
+
+    conectarBD(){
+        conectarConBD()
     }
 
 }
