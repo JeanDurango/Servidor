@@ -2,16 +2,19 @@
 // 1. Resivir peticiones 
 // 2. Ejecutar logica de negocios 
 // 3. Llamar la capa de servicios 
-// 4. Enviar las respuestas al cliente  
+// 4. Enviar las respuestas al cliente 
+
+// importo el servico 
+import { ServicioHabitacion } from "../services/ServicioHabitacion.js"
 export class ControladorHabitacion{
     constructor(){}
-    buscarTodas(req,res)
-    {       
-        let datos = [{nombre:"Juan",edad:32},{nombre:"sara",edad:31}] //borrar despues
+    async buscarTodas(req,res)
+    {  
+        let servicioHabitacion=new ServicioHabitacion()
         try {//todo sale bien 
             res.status(200).json({
                mensaje:"Exito buscando los datos",
-               data:datos,
+               data:await servicioHabitacion.buscarTodas(),
                estado:true
             })          
         } catch (error) {
@@ -23,14 +26,17 @@ export class ControladorHabitacion{
         }
     }
 
-    buscarPorId(req,res){
-        let datos = [{nombre:"Jean",edad:32}] //borrar despues
+    async buscarPorId(req,res)
+    {
+        let servicioHabitacion=new ServicioHabitacion() 
+        
+
         let id=req.params.id
         console.log(id)
         try {//todo sale bien 
             res.status(200).json({
                mensaje:"Exito buscando los datos "+id,
-               data:datos,
+               data:await servicioHabitacion.buscarPorId(id),
                estado:true
             })          
         } catch (error) {
@@ -42,12 +48,14 @@ export class ControladorHabitacion{
         }
     }
 
-    registrar(req,res){
+    async registrar(req,res){
+        let servicioHabitacion=new ServicioHabitacion() 
         let datosPeticion=req.body
         try {
+            await servicioHabitacion.registrar(datosPeticion)
             res.status(200).json({
                 mensaje:"Exito agregando la habitacion",
-                data:datosPeticion,
+                data:null,
                 estado:true
             })
         } catch (error) {
@@ -59,13 +67,16 @@ export class ControladorHabitacion{
         }
     }
 
-    editar(req,res){
+    async editar(req,res){
+        
+        let servicioHabitacion=new ServicioHabitacion() 
         let id=req.params.id
         let datosPeticion=req.body
         try {
+            await servicioHabitacion.editar(id,datosPeticion)
             res.status(200).json({
                 mensaje:"Exito editando habitacion",
-                data:datosPeticion,
+                data:null,
                 estado:true
             })
         } catch (error) {
@@ -77,12 +88,14 @@ export class ControladorHabitacion{
         }
     }
 
-    eliminar(req,res){
+    async eliminar(req,res){
+        let servicioHabitacion=new ServicioHabitacion()
         let id=req.params.id
         try {
+            await servicioHabitacion.eliminar(id)
             res.status(200).json({
                 mensaje:"Exito eliminando habitacion",
-                data:[],
+                data:null,
                 estado:true
             })
         } catch (error) {
