@@ -5,16 +5,16 @@
 // 4. Enviar las respuestas al cliente 
 
 // importo el servico 
-import { ServicioHabitacion } from "../services/ServicioHabitacion.js"
+import { ServicioCliente } from "../services/ServicioCliente.js"
 export class ControladorHabitacion{
     constructor(){}
     async buscarTodas(req,res)
     {  
-        let servicioHabitacion=new ServicioHabitacion()
+        let servicioCliente=new ServicioCliente()
         try {//todo sale bien 
             res.status(200).json({
                mensaje:"Exito buscando los datos",
-               data:await servicioHabitacion.buscarTodas(),
+               data:await servicioCliente.buscarTodas(),
                estado:true
             })          
         } catch (error) {
@@ -28,15 +28,13 @@ export class ControladorHabitacion{
 
     async buscarPorId(req,res)
     {
-        let servicioHabitacion=new ServicioHabitacion() 
-        
-
+        let servicioCliente=new ServicioCliente()
         let id=req.params.id
         console.log(id)
         try {//todo sale bien 
             res.status(200).json({
                mensaje:"Exito buscando los datos "+id,
-               data:await servicioHabitacion.buscarPorId(id),
+               data:await servicioCliente.buscarPorId(id),
                estado:true
             })          
         } catch (error) {
@@ -49,18 +47,18 @@ export class ControladorHabitacion{
     }
 
     async registrar(req,res){
-        let servicioHabitacion=new ServicioHabitacion() 
+        let servicioCliente=new ServicioCliente()
         let datosPeticion=req.body
         try {
-            await servicioHabitacion.registrar(datosPeticion)
+            await servicioCliente.registrar(datosPeticion)
             res.status(200).json({
-                mensaje:"Exito agregando la habitacion",
+                mensaje:"Exito agregando el cliente",
                 data:null,
                 estado:true
             })
         } catch (error) {
             res.status(400).json({
-                mensaje:"Fallamos agregando habitacion",
+                mensaje:"Fallamos agregando el cliente",
                 data:[],
                 estado:false
              }) 
@@ -69,19 +67,19 @@ export class ControladorHabitacion{
 
     async editar(req,res){
         
-        let servicioHabitacion=new ServicioHabitacion() 
+        let servicioCliente=new ServicioCliente()
         let id=req.params.id
         let datosPeticion=req.body
         try {
-            await servicioHabitacion.editar(id,datosPeticion)
+            await servicioCliente.editar(id,datosPeticion)
             res.status(200).json({
-                mensaje:"Exito editando habitacion",
+                mensaje:"Exito editando el cliente",
                 data:null,
                 estado:true
             })
         } catch (error) {
             res.status(400).json({
-                mensaje:"Fallamos editando habitacion",
+                mensaje:"Fallamos editando el cliente",
                 data:[],
                 estado:false
              }) 
@@ -89,18 +87,18 @@ export class ControladorHabitacion{
     }
 
     async eliminar(req,res){
-        let servicioHabitacion=new ServicioHabitacion()
+        let servicioCliente=new ServicioCliente()
         let id=req.params.id
         try {
-            await servicioHabitacion.eliminar(id)
+            await servicioCliente.eliminar(id)
             res.status(200).json({
-                mensaje:"Exito eliminando habitacion",
+                mensaje:"Exito eliminando el cliente",
                 data:null,
                 estado:true
             })
         } catch (error) {
             res.status(400).json({
-                mensaje:"Fallamos eliminando habitacion"+error,
+                mensaje:"Fallamos eliminando el cliente"+error,
                 data:[],
                 estado:false
              }) 

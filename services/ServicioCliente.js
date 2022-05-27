@@ -2,7 +2,7 @@
 import { modeloCliente } from "../models/modeloCliente.js"
 
 export class ModeloCliente{
-    constructor(habitacion){}
+    constructor(cliente){}
 
     async registrar(cliente){
         let clienteAResgistrar=new modeloCliente(cliente)
@@ -10,20 +10,20 @@ export class ModeloCliente{
     }
 
     async buscarTodas(){
-        let habitaciones=await modeloHabitacion.find()
-        return habitaciones
+        let clientes=await modeloCliente.find()
+        return clientes
     }
 
     async buscarPorId(id){
-        let habitacion=await modeloHabitacion.findById(id)
-        return habitacion
+        let cliente=await modeloCliente.findById(id)
+        return cliente
     }
 
     async editar(id,datos){
-        return await modeloHabitacion.findByIdAndUpdate(id,datos)
+        return await modeloCliente.findByIdAndUpdate(id,datos)
     }
 
     async eliminar(id){
-        return await modeloHabitacion.findByIdAndDelete(id)
+        return await modeloCliente.findByIdAndDelete(id)
     }
 }
