@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;// esquema de datos (que  datos tiene mi modelo )
 
 // creo mi propio esquema de datos
 const Cliente=new Schema({
+    idHabitacion:{
+        type:String,
+        req:true
+    },
     nombre : {
         type:String,
         req:true
@@ -13,7 +17,7 @@ const Cliente=new Schema({
         req:true
     },
     telefono:{
-        type:Number,
+        type:String,
         req:true
     },
     fecha_entrada:{
@@ -25,8 +29,12 @@ const Cliente=new Schema({
         req:true
     },
     numero_personas:{
-        type:Date,
+        type:Number,
         req:true
+    },
+    costo:{
+        type:Number,
+        required:false
     }
 
 })
