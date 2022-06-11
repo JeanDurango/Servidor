@@ -28,7 +28,8 @@ export class ControladorCliente{
              }) 
         }
     }
-
+    
+    
     async registrar(req,res){
         let servicioCliente=new ServicioCliente()
         let servicioHabitacion=new ServicioHabitacion()
@@ -41,20 +42,19 @@ export class ControladorCliente{
             console.log(precioNoche)
             let fechasalida = datosPeticion.fecha_salida
             console.log(fechasalida)
-            let fechaentrada = datosPeticion.fecha_entrada 
-            console.log(fechaentrada)   
-           // let diastotales = fechaentrada.getTime() - fechasalida.getTime()
-            let difference= Math.abs(fechaentrada-fechasalida);
-            console.log(difference)
-            let diastotales = difference/(1000 * 3600 * 24)
-            console.log(diastotales)
+            let fechaentrada = datosPeticion.fecha_entrada
+            console.log(fechaentrada) 
+           // calculamos la difenrencia de fechas
+           let milsegundosDias = 24 * 60 * 60 * 1000
+           let milisegundosTranscurridos = Math.abs(fechaentrada - fechasalida);
+           let diastotales = Math.round(milisegundosTranscurridos/milsegundosDias); 
+           console.log(diastotales)        
             //costo total 
             let costoTotal = (diastotales * precioNoche)
-            console.log(costoTotal)
+            console.log(costoTotal)  
              //insercion de costo
-            datosPeticion.costo = costoTotal
-         
-
+            //datosPeticion.costo = costoTotal
+             
             await servicioCliente.registrar(datosPeticion)///ingresar cliente
             res.status(200).json({
                 mensaje:"Exito agregando el cliente",
